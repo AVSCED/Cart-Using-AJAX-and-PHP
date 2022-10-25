@@ -65,20 +65,15 @@ if ($action == "add_Quant"){
 if ($action == "reduce_Quant"){
     $ind = 0;
     $m= $_POST['m'];
-    for ($i = 0; $i < count($_SESSION['cart_Array']); $i++) {
-      if ($_SESSION['cart_Array'][$i].['id'] == $m) {
-        $ind = $i;
-      }
-    }$z=0;
+    $i=0;
     foreach ($_SESSION['cart_Array'] as $key1 => $value1) {
         if ($value1['id'] == $m) {
-            if ($_SESSION['cart_Array'][$z]['quantity'] > 1) {
-                $_SESSION['cart_Array'][$z]['quantity'] = $_SESSION['cart_Array'][$z]['quantity'] - 1;
-            } 
-            else {
-                array_splice($_SESSION['cart_Array'],$ind, 1);
-            }$z++;
-          }
+            if ($_SESSION['cart_Array'][$i]['quantity'] > 1) {
+                $_SESSION['cart_Array'][$i]['quantity'] = $_SESSION['cart_Array'][$i]['quantity'] - 1;
+            }else{
+                array_splice($_SESSION['cart_Array'],$i, 1);
+            }
+        }$i=$i+1;
     }
     echo json_encode($_SESSION['cart_Array']);
 } 
